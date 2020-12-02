@@ -1,0 +1,38 @@
+*   {
+        box-sizing: border-box;
+        transition: height ease-in-out 1s;
+    }
+
+body{
+    align-items: center;
+    background-color: #1F181F;
+    color: #FFFFFFDD;
+}
+
+.Kanban-Column{
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+}
+
+.Kanban-Container{
+    height: 100%;
+    background-color: #3D383F;
+    border-radius: 30px;
+    padding: 15px;
+    border-color: #888888;
+    border-width: 5px;
+    border-style: solid;
+}
+
+@media screen and (max-width: 1000px){
+    .Kanban-Column{
+        width: 100%;
+    }
+}
+
+.Kanban-Title{
+    font-weight: 50 0;
+    font-size: 40px;
+    text-align: center;
+}
