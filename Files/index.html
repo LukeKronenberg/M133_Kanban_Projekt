@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,21 @@
     <link rel="icon" href="Images/icon.jpg" type="image/jpg">
     <link rel="stylesheet" href="Styles.css">
 </head>
+
 <body>
+    <div id="AddCardDialog" class="AddCardDialog">
+        <label for="">Title</label><br>
+        <input type="text"><br>
+        <label for="">Description</label><br>
+        <input class="Description" type="text"><br>
+        <a class="Card-Title" onclick="AddCardDialog()">Add Card</a>
+    </div>
     <div class="Kanban-Column">
         <div class="Kanban-Container">
             <div class="Kanban-Title">ToDo</div>
-            <div class="Kanban-Cards" id="KanbanCardsToDo">
+            <div><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"><a onclick="ShowAddCardDialog(3)"></a>
+            </div>
+            <div class="Kanban-Cards" id="KanbanCards1">
 
             </div>
         </div>
@@ -19,7 +30,9 @@
     <div class="Kanban-Column">
         <div class="Kanban-Container">
             <div class="Kanban-Title">Doing</div>
-            <div class="Kanban-Cards" id="KanbanCardsDoing">
+            <div><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"><a onclick="ShowAddCardDialog(3)"></a>
+            </div>
+            <div class="Kanban-Cards" id="KanbanCards2">
 
             </div>
         </div>
@@ -27,14 +40,14 @@
     <div class="Kanban-Column">
         <div class="Kanban-Container">
             <div class="Kanban-Title">Done</div>
-                    <div><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></div>
-            <div class="Kanban-Cards" id="KanbanCardsDone">
-                <div class="Kanban-Card">
-                    <div class="Card-Title" id="Title">Yes</div>
-                    <div class="Card-Description" id="Description">Yes is Yes</div>
-                </div>
+            <div><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"><a onclick="ShowAddCardDialog(3)"></a>
+            </div>
+            <div class="Kanban-Cards" id="KanbanCards3">
+
             </div>
         </div>
     </div>
 </body>
+<script src="JS/1.js"></script>
+
 </html>
