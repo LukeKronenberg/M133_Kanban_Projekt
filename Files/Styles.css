@@ -19,8 +19,15 @@ body{
     padding: 15px;
 }
 
-.Kanban-Container{
-    height: 100%;
+.box-bright{
+    border-radius: 15px;
+    background-color: #88888888;
+    border-color: #FFFFFF88;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.box-dark{
     background-color: #3D383F;
     border-radius: 30px;
     padding: 10px;
@@ -28,6 +35,10 @@ body{
     border-width: 5px;
     border-style: solid;
     text-align: center;
+}
+
+.Kanban-Container{
+    height: 100%;
 }
 
 @media screen and (max-width: 1000px){
@@ -42,18 +53,9 @@ body{
     user-select: none;
 }
 
-.Kanban-Cards{
-
-}
-
 .Kanban-Card{
     margin-top: 10px;
     min-height: 50px;
-    border-radius: 15px;
-    background-color: #88888888;
-    border-color: #FFFFFF88;
-    border-width: 2px;
-    border-style: solid;
     transition: background-color ease-in-out 200ms;
 }
 
@@ -98,16 +100,8 @@ img{
     transform: translateY(-3px);
 }
 
-.AddCardDialog{
-    
+.AddCardDialog{    
     position: absolute;
-    background-color: #3D383F;
-    border-radius: 30px;
-    padding: 10px;
-    border-color: #888888;
-    border-width: 5px;
-    border-style: solid;
-    text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -121,8 +115,22 @@ input{
 .Description{
     width: 500px;
     height: 100px;
+    margin-bottom: 0;
+    
 }
 
 .hidden{
     display: none;
+}
+
+.TextButton{    
+    transition: filter 100ms ease-in-out, transform 100ms ease-in-out;
+    filter: drop-shadow(0px 0px 1px #111111);
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.TextButton:hover{
+    filter: drop-shadow(0px 5px 5px #111111);
+    transform: translateY(-5px);
 }

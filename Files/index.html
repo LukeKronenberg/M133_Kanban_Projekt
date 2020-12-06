@@ -10,44 +10,52 @@
 </head>
 
 <body>
-    <div id="AddCardDialog" class="AddCardDialog">
+    <div id="AddCardDialog" class="AddCardDialog box-dark hidden">
+        <label for="Column">Column</label><br>
+        <select name="Column" id="Input-Column">
+            <option value="1">ToDo</option>
+            <option value="2">Doing</option>
+            <option value="3">Done</option>
+        </select><br><br>
         <label for="">Title</label><br>
-        <input type="text"><br>
+        <textarea name="" id="Input-Title" cols="100" rows="1"></textarea><br><br>
         <label for="">Description</label><br>
-        <input class="Description" type="text"><br>
-        <a class="Card-Title" onclick="AddCardDialog()">Add Card</a>
+        <textarea name="" id="Input-Description" cols="100" rows="10"></textarea><br>
+        <a class="Card-Title TextButton box-bright" onclick=AddCardDialog()>Add Card</a><br>
+        <a class="Card-Title TextButton box-bright" onclick=ToggleAddCardDialog()>Cancel</a>
     </div>
     <div class="Kanban-Column">
-        <div class="Kanban-Container">
+        <div class="Kanban-Container box-dark">
             <div class="Kanban-Title">ToDo</div>
-            <div><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"><a onclick="ShowAddCardDialog(3)"></a>
+            <div><a onclick=ToggleAddCardDialog(1)><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
             </div>
-            <div class="Kanban-Cards" id="KanbanCards1">
+            <div id="KanbanCards1">
 
             </div>
         </div>
     </div>
     <div class="Kanban-Column">
-        <div class="Kanban-Container">
+        <div class="Kanban-Container box-dark">
             <div class="Kanban-Title">Doing</div>
-            <div><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"><a onclick="ShowAddCardDialog(3)"></a>
+            <div><a onclick=ToggleAddCardDialog(2)><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
             </div>
-            <div class="Kanban-Cards" id="KanbanCards2">
+            <div id="KanbanCards2">
 
             </div>
         </div>
     </div>
     <div class="Kanban-Column">
-        <div class="Kanban-Container">
+        <div class="Kanban-Container box-dark">
             <div class="Kanban-Title">Done</div>
-            <div><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"><a onclick="ShowAddCardDialog(3)"></a>
+            <div><a onclick=ToggleAddCardDialog(3)><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
             </div>
-            <div class="Kanban-Cards" id="KanbanCards3">
+            <div id="KanbanCards3">
 
             </div>
         </div>
     </div>
 </body>
+
 <script src="JS/1.js"></script>
 
 </html>
