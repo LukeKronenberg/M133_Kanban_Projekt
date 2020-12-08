@@ -48,7 +48,9 @@ function UpdateCards(array) {
 function AddCard(card) {
     document.getElementById(`KanbanCards${card._Tab}`).innerHTML +=
     `<div class="Kanban-Card box-bright" id="${card._Id}" ondragstart="drag(event)" draggable="true">
+        <a onclick="MoveCard(-1, this)"><-</a>
         <a onclick="DelCard(${card._Id})"><img class="ImgDelCard" src="Images/trash.png" alt="Delete Card"></a>
+        <a onclick="MoveCard(1, this)">-></a>
         <div class="Card-Title" id="Title">${card._Title}</div>
         <div class="Card-Description" id="Description">${card._Description}</div>
     </div>`;
@@ -91,8 +93,19 @@ function drop(ev, el) {
     var data = ev.dataTransfer.getData("text");
     Cards.forEach(async card => {
         if (card._Id == data) {
-            card._Tab = el.id.replace("KanbanCards", "");
+            card._Tab = parseInt(el.id.replace("KanbanCards", ""));
         }
     });
     el.appendChild(document.getElementById(data));
+}
+
+function MoveCard(value, el){
+    Cards.forEach(async card => {
+        if (card._Id == parseInt(el.parentElement.id)) {
+            if (1 <= (parseInt(card._Tab) + parseInt(value)) && 3 >= (parseInt(card._Tab) + parseInt(value))) {
+                card._Tab = parseInt(card._Tab) + parseInt(value);
+                document.getElementById(`KanbanCards${card._Tab}`).appendChild(el.parentElement);
+            }
+        }
+    });
 }
