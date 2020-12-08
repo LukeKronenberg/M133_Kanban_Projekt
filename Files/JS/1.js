@@ -47,16 +47,16 @@ function UpdateCards(array) {
 
 function AddCard(card) {
     document.getElementById(`KanbanCards${card._Tab}`).innerHTML +=
-        `<div class="Kanban-Card box-bright" id="CardId${card._Id}">
-        <a onclick=DelCard(${card._Id})><img class="ImgDelCard" src="Images/trash.png" alt=""></a>
+    `<div class="Kanban-Card box-bright" id="${card._Id}" ondragstart="drag(event)" draggable="true">
+        <a onclick="DelCard(${card._Id})"><img class="ImgDelCard" src="Images/trash.png" alt="Delete Card"></a>
         <div class="Card-Title" id="Title">${card._Title}</div>
         <div class="Card-Description" id="Description">${card._Description}</div>
     </div>`;
 }
 
 function DelCard(cardId) {
-    document.getElementById(`CardId${cardId}`).remove();
-    Cards.forEach(async card =>{
+    document.getElementById(`${cardId}`).remove();
+    Cards.forEach(async card => {
         if (card._Id == cardId) {
             delete Cards[card._Id];
         }
@@ -76,4 +76,23 @@ function AddCardDialog() {
 
     AddCard(Cards[Cards.length - 1]);
     ToggleAddCardDialog();
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev, el) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    Cards.forEach(async card => {
+        if (card._Id == data) {
+            card._Tab = el.id.replace("KanbanCards", "");
+        }
+    });
+    el.appendChild(document.getElementById(data));
 }

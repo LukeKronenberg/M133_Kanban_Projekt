@@ -18,38 +18,38 @@
             <option value="3">Done</option>
         </select><br><br>
         <label for="">Title</label><br>
-        <textarea name="" id="Input-Title" cols="100" rows="1"></textarea><br><br>
+        <textarea name="" id="Input-Title" rows="1"></textarea><br><br>
         <label for="">Description</label><br>
-        <textarea name="" id="Input-Description" cols="100" rows="10"></textarea><br>
+        <textarea name="" id="Input-Description" rows="10"></textarea><br>
         <a class="Card-Title TextButton box-bright" onclick=AddCardDialog()>Add Card</a><br>
-        <a class="Card-Title TextButton box-bright" onclick=ToggleAddCardDialog()>Cancel</a>
+        <a class="Card-Title TextButton box-bright" onclick="ToggleAddCardDialog()">Cancel</a>
     </div>
     <div class="Kanban-Column">
-        <div class="Kanban-Container box-dark">
+        <div class="Kanban-Container box-dark" draggable="false">
             <div class="Kanban-Title">ToDo</div>
-            <div><a onclick=ToggleAddCardDialog(1)><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
+            <div><a onclick="ToggleAddCardDialog(1)"><img draggable="false" class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
             </div>
-            <div id="KanbanCards1">
+            <div class="KanbanCards" id="KanbanCards1" ondrop="drop(event, this)" ondragover="allowDrop(event)">
 
             </div>
         </div>
     </div>
     <div class="Kanban-Column">
-        <div class="Kanban-Container box-dark">
+        <div class="Kanban-Container box-dark" draggable="false">
             <div class="Kanban-Title">Doing</div>
-            <div><a onclick=ToggleAddCardDialog(2)><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
+            <div><a onclick="ToggleAddCardDialog(2)"><img draggable="false" class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
             </div>
-            <div id="KanbanCards2">
-
+            <div class="KanbanCards" id="KanbanCards2" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+                
             </div>
         </div>
     </div>
     <div class="Kanban-Column">
-        <div class="Kanban-Container box-dark">
+        <div class="Kanban-Container box-dark" draggable="false">
             <div class="Kanban-Title">Done</div>
-            <div><a onclick=ToggleAddCardDialog(3)><img class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
+            <div><a onclick="ToggleAddCardDialog(3)"><img  class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
             </div>
-            <div id="KanbanCards3">
+            <div class="KanbanCards" id="KanbanCards3" ondrop="drop(event, this)" ondragover="allowDrop(event)">
 
             </div>
         </div>
