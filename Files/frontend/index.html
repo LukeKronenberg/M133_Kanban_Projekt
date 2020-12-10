@@ -27,7 +27,8 @@
     <div class="Kanban-Column">
         <div class="Kanban-Container box-dark" draggable="false">
             <div class="Kanban-Title">ToDo</div>
-            <div><a onclick="ToggleAddCardDialog(1)"><img draggable="false" class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
+            <div>
+                <img onclick="ToggleAddCardDialog(1)" draggable="false" class="ImgAddCard" src="Images/plus.png" alt="Add New Card">
             </div>
             <div class="KanbanCards" id="KanbanCards1" ondrop="drop(event, this)" ondragover="allowDrop(event)">
 
@@ -37,7 +38,8 @@
     <div class="Kanban-Column">
         <div class="Kanban-Container box-dark" draggable="false">
             <div class="Kanban-Title">Doing</div>
-            <div><a onclick="ToggleAddCardDialog(2)"><img draggable="false" class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
+            <div>
+                <img onclick="ToggleAddCardDialog(2)" draggable="false" class="ImgAddCard" src="Images/plus.png" alt="Add New Card">
             </div>
             <div class="KanbanCards" id="KanbanCards2" ondrop="drop(event, this)" ondragover="allowDrop(event)">
                 
@@ -47,7 +49,8 @@
     <div class="Kanban-Column">
         <div class="Kanban-Container box-dark" draggable="false">
             <div class="Kanban-Title">Done</div>
-            <div><a onclick="ToggleAddCardDialog(3)"><img  class="ImgAddCard" src="Images/plus.png" alt="Add New Card"></a>
+            <div>
+                <img onclick="ToggleAddCardDialog(3)" class="ImgAddCard" src="Images/plus.png" alt="Add New Card">
             </div>
             <div class="KanbanCards" id="KanbanCards3" ondrop="drop(event, this)" ondragover="allowDrop(event)">
 
@@ -56,6 +59,6 @@
     </div>
 </body>
 
-<script src="JS/functionality.js"></script>
+<script src="functionality.js"></script>
 
 </html>

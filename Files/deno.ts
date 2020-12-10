@@ -1,16 +1,24 @@
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Application, send } from "https://deno.land/x/oak/mod.ts";
+import cardRouter from "./Deno/routes.ts";
 
 const app = new Application();
-const port: number = 8080;
+const port: number = 8000;
 
-const router = new Router();
-router.get("/", ({ response }: { response: any }) => {
-  response.body = {
-    message: "hello world",
-  };
+app.use(cardRouter.routes());
+app.use(cardRouter.allowedMethods());
+
+app.use(async context => {
+  await send(context,
+    context.request.url.pathname,
+    {
+      root: `${Deno.cwd()}/frontend`,
+      index: "index.html"
+})});
+
+app.addEventListener("listen", ({ secure, hostname, port }) => {
+  const protocol = secure ? "https://" : "http://";
+  const url = `${protocol}${hostname ?? "localhost"}:${port}`;
+  console.log(`Listening on: ${port}`);
 });
-app.use(router.routes());
-app.use(router.allowedMethods());
 
-console.log('running on port ', port);
 await app.listen({ port });
