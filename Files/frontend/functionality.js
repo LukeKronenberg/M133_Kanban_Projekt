@@ -7,10 +7,10 @@ class Card {
     }
 
     set Id(value) {
-        this._Id = value.toString();
+        this._Id = value;
     }
     set Tab(value) {
-        this._Tab = value.toString();
+        this._Tab = value;
     }
     set Title(value) {
         this._Title = value;
@@ -35,45 +35,40 @@ class Card {
 
 var Cards = [];
 
-async function LoadCards() {
-    response = await fetch(`/cards`);
-    cards = await response.json();
-    console.log(cards.data);
-    for (const card of cards.data){
-        newCard = new Card(card.id, card.tab, card.title, card.description);
-        console.log(newCard);
-        Cards.push(newCard);
-        DisplayCard(newCard);
-    }
-}
-
 function DisplayCard(card) {
     document.getElementById(`KanbanCards${card._Tab}`).innerHTML +=
-    `<div class="Kanban-Card box-bright" id="${card._Id}" ondragstart="drag(event)" draggable="true">
-        <a onclick="MoveCard(-1, this)"><-</a>
-        <img onclick="DelCard(${card._Id})" class="ImgDelCard" src="Images/trash.png" alt="Delete Card">
-        <a onclick="MoveCard(1, this)">-></a></br>
+        `<div class="Kanban-Card box-bright" id="${card._Id}" ondragstart="drag(event)" draggable="true">
+        <a class="LeftRightButtons" onclick="MoveCard(-1, this)"><-</a>
+        <img onclick="DelCard('${card._Id}')" class="ImgDelCard" src="Images/trash.png" alt="Delete Card">
+        <a class="LeftRightButtons" onclick="MoveCard(1, this)">-></a></br>
         <div class="Card-Title" id="Title">${card._Title}</div>
         <div class="Card-Description" id="Description">${card._Description}</div>
     </div>`;
 }
 
-async function DelCard(cardId) {
-    document.getElementById(`${cardId}`).remove();
-    Cards.forEach(async card => {
-        if (card._Id == cardId) {
-            await fetch(`/cards/${card._Id}`, { method: "DELETE" });
-            delete Cards[card._Id];
-        }
-    })
+async function LoadCards() {
+    response = await fetch(`/cards`);
+    cards = await response.json();
+    console.log(cards.data);
+    for (const card of cards.data) {
+        newCard = new Card(card.id, card.tab, card.title, card.description);
+        Cards.push(newCard);
+        DisplayCard(newCard);
+    }
 }
 
-function UpdateCardTab(card){
+async function DelCard(cardId) {
+    await fetch(`/cards/${cardId}`, { method: "DELETE" });
+    document.getElementById(`${cardId}`).remove();
+    Cards = Cards.filter(c => c._Id !== cardId);
+}
+
+function UpdateCard(card) {
     fetch(`/cards/${card._Id}`, {
         method: "PUT",
         body: JSON.stringify(card),
-        headers: { 'Content-Type': 'application/json'}
-    })
+        headers: { 'Content-Type': 'application/json' }
+    });
 }
 
 async function ToggleAddCardDialog(TabTmp) {
@@ -82,20 +77,30 @@ async function ToggleAddCardDialog(TabTmp) {
 }
 
 async function AddCardDialog() {
-    Cards.push(new Card(Cards.length, document.getElementById("Input-Column").value, document.getElementById("Input-Title").value, document.getElementById("Input-Description").value));
+    var card = {
+        tab: document.getElementById("Input-Column").value,
+        title: document.getElementById("Input-Title").value,
+        description: document.getElementById("Input-Description").value,
+    };
+
+    response = await fetch(
+        `/cards`,
+        {
+            method: "POST",
+            body: JSON.stringify(card),
+            headers: { 'Content-Type': 'application/json' }
+        }
+    )
+
+    card = await response.json();
+    card = card.data;
+    card = new Card(card.id, card.tab, card.title, card.description);
+    Cards.push(card);
+    DisplayCard(card);
 
     document.getElementById("Input-Title").value = "";
     document.getElementById("Input-Description").value = "";
 
-    DisplayCard(Cards[Cards.length - 1]);
-    await fetch(
-        `/cards`,
-        {
-            method: "POST",
-            body: JSON.stringify(Cards[Cards.length - 1]),
-            headers: { 'Content-Type': 'application/json'}
-        }
-    )
     ToggleAddCardDialog();
 }
 
@@ -114,19 +119,19 @@ function drop(ev, el) {
         if (card._Id == data) {
             card._Tab = el.id.replace("KanbanCards", "");
             console.log(card);
-            UpdateCardTab(card);
+            UpdateCard(card);
         }
     });
     el.appendChild(document.getElementById(data));
 }
 
-function MoveCard(value, el){
+function MoveCard(value, el) {
     Cards.forEach(async card => {
-        if (card._Id == parseInt(el.parentElement.id)) {
-            if (1 <= (parseInt(card._Tab) + parseInt(value)) && 3 >= (parseInt(card._Tab) + parseInt(value))) {
-                card._Tab = (parseInt(card._Tab) + parseInt(value)).toString();
+        if (card._Id == el.parentElement.id) {
+            if (1 <= (parseInt(card._Tab) + value) && 3 >= (parseInt(card._Tab) + value)) {
+                card._Tab = (parseInt(card._Tab) + value);
                 document.getElementById(`KanbanCards${card._Tab}`).appendChild(el.parentElement);
-                UpdateCardTab(card);
+                UpdateCard(card);
             }
         }
     });

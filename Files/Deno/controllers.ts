@@ -1,4 +1,5 @@
 import Card from "./interface.ts";
+import { v4 } from "https://deno.land/std@0.77.0/uuid/mod.ts";
 
 export var cards: Card[] = [];
 
@@ -24,19 +25,19 @@ export default {
         }
 
         const values = await body.value;
+
         let newCard: Card = {
-            id: values._Id,
-            tab: values._Tab,
-            title: values._Title,
-            description: values._Description,
+            id: v4.generate(),
+            tab: values.tab,
+            title: values.title,
+            description: values.description,
         };
-        console.log(values);
+
         cards.push(newCard);
 
-        let data = [...cards];
         response.body = {
             success: true,
-            data,
+            data: newCard,
         };
     },
     deleteCardById: ({ params, response }: { params: { id: string }; response: any }) => {
@@ -44,7 +45,6 @@ export default {
         response.status = 200;
         response.body = {
             success: true,
-            data: cards,
         };
     },
     updateCardById: async (
@@ -56,7 +56,6 @@ export default {
     ) => {
         const card: Card | undefined = cards.find(c => c.id === params.id);
         if (!card) {
-            response.status = 404;
             response.body = {
                 success: false,
                 message: "Card not found",
@@ -65,25 +64,24 @@ export default {
         }
 
         const body = await request.body();
-        console.log(await body.value);
         let values = await body.value;
+
         let updatedCard: Card = {
             id: values._Id,
             tab: values._Tab,
             title: values._Title,
             description: values._Description,
         };
-        console.log(updatedCard);
-        let newCards = cards.map(c => {
+        
+        cards.map(c => {
             if (c.id === params.id) {
                 c.tab = updatedCard.tab;
             }
         });
-        console.log(cards);
+        
         response.status = 200;
         response.body = {
             success: true,
-            data: newCards,
         };
     },
 };

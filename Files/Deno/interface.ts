@@ -1,6 +1,6 @@
 export default interface Card {
     id: string,
-    tab: string,
+    tab: number,
     title: string,
     description: string,
 }
