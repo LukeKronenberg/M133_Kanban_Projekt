@@ -55,6 +55,8 @@ async function LoadCards() {
         Cards.push(newCard);
         DisplayCard(newCard);
     }
+    document.getElementById("MainWindow").classList.remove("hidden");
+    document.getElementById("LoadingWindow").classList.add("hidden");
 }
 
 async function DelCard(cardId) {
