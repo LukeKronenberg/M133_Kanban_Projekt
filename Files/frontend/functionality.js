@@ -39,7 +39,7 @@ function DisplayCard(card) {
     document.getElementById(`KanbanCards${card._Tab}`).innerHTML +=
         `<div class="Kanban-Card box-bright" id="${card._Id}" ondragstart="drag(event)" draggable="true">
         <a class="LeftRightButtons" onclick="MoveCard(-1, this)"><-</a>
-        <img onclick="DelCard('${card._Id}')" class="ImgDelCard" src="Images/trash.png" alt="Delete Card">
+        <img onclick="DelCard('${card._Id}')" class="ImgDelCard imgBase" src="Images/trash.png" alt="Delete Card">
         <a class="LeftRightButtons" onclick="MoveCard(1, this)">-></a></br>
         <div class="Card-Title" id="Title">${card._Title}</div>
         <div class="Card-Description" id="Description">${card._Description}</div>
@@ -49,7 +49,6 @@ function DisplayCard(card) {
 async function LoadCards() {
     response = await fetch(`/cards`);
     cards = await response.json();
-    console.log(cards.data);
     for (const card of cards.data) {
         newCard = new Card(card.id, card.tab, card.title, card.description);
         Cards.push(newCard);
@@ -78,7 +77,7 @@ async function ToggleAddCardDialog(TabTmp) {
     document.getElementById("AddCardDialog").classList.toggle("hidden");
 }
 
-async function AddCardDialog() {
+async function AddCardFromDialog() {
     var card = {
         tab: document.getElementById("Input-Column").value,
         title: document.getElementById("Input-Title").value,
@@ -103,7 +102,7 @@ async function AddCardDialog() {
     document.getElementById("Input-Title").value = "";
     document.getElementById("Input-Description").value = "";
 
-    ToggleAddCardDialog();
+    document.getElementById("AddCardDialog").classList.add("hidden");
 }
 
 function allowDrop(ev) {

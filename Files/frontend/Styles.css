@@ -8,7 +8,7 @@
 
 body{
     align-items: center;
-    background-color: #1C273A;
+    background-color: #111115;
     color: #FFFFFFDD;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -25,6 +25,7 @@ body{
     border-color: #FFFFFF88;
     border-width: 2px;
     border-style: solid;
+    box-shadow: 3px 10px 5px 1px #080808;
 }
 
 .box-dark{
@@ -35,6 +36,7 @@ body{
     border-width: 5px;
     border-style: solid;
     text-align: center;
+    box-shadow: 3px 10px 5px 1px #000;
 }
 
 .Kanban-Container{
@@ -76,7 +78,7 @@ body{
 .imgBase{
     user-select: none;
     transition: filter 200ms ease-in-out, transform 200ms ease-in-out;
-    filter: drop-shadow(0px 0px 1px #111111);  
+    filter: drop-shadow(0 1px 1px #111111);  
 }
 
 .ImgAddCard{
@@ -85,7 +87,7 @@ body{
 }
 
 .ImgAddCard:hover{
-    filter: drop-shadow(1px 10px 5px #111111);    
+    filter: drop-shadow(3px 10px 3px #111111);    
     transform: translateY(-10px);
 }
 
@@ -96,15 +98,17 @@ body{
 }
 
 .ImgDelCard:hover{
-    filter: drop-shadow(0px 3px 5px #111111);    
-    transform: translateY(-3px);
+    filter: drop-shadow(1px 4px 1px #111111);    
+    transform: translateY(-4px);
 }
 
 .ImgLoading{
+    width: 480px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 10px #07F0FC);
 }
 
 .LeftRightButtons{
@@ -115,8 +119,8 @@ body{
 }
 
 .LeftRightButtons:hover{
-    filter: drop-shadow(0px 3px 5px #111111);    
-    transform: translateY(-3px);
+    filter: drop-shadow(1px 4px 1px #111111);    
+    transform: translateY(-4px);
 }
 
 .AddCardDialog{    
@@ -163,5 +167,12 @@ input{
 }
 
 .KanbanCards{
-    min-height: 50px;
+    min-height: 100px;
+}
+
+.LoadingWindow{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% -50%);
 }
