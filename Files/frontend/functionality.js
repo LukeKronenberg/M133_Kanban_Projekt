@@ -36,14 +36,14 @@ class Card {
 var Cards = [];
 
 function DisplayCard(card) {
-    document.getElementById(`KanbanCards${card._Tab}`).innerHTML +=
-        `<div class="Kanban-Card box-bright" id="${card._Id}" ondragstart="drag(event)" draggable="true">
-        <a class="LeftRightButtons" onclick="MoveCard(-1, this)"><-</a>
-        <img onclick="DelCard('${card._Id}')" class="ImgDelCard imgBase" src="Images/trash.png" alt="Delete Card">
-        <a class="LeftRightButtons" onclick="MoveCard(1, this)">-></a></br>
-        <div class="Card-Title" id="Title">${card._Title}</div>
-        <div class="Card-Description" id="Description">${card._Description}</div>
-    </div>`;
+    document.getElementById(`KanbanCards${card._Tab}`).insertAdjacentHTML('afterbegin', 
+    `<div class="Kanban-Card box-bright" id="${card._Id}" ondragstart="drag(event)" draggable="true">
+    <a class="LeftRightButtons" onclick="MoveCard(-1, this)"><-</a>
+    <img onclick="DelCard('${card._Id}')" class="ImgDelCard imgBase" src="Images/trash.png" alt="Delete Card">
+    <a class="LeftRightButtons" onclick="MoveCard(1, this)">-></a></br>
+    <div class="Card-Title" id="Title">${card._Title}</div>
+    <div class="Card-Description" id="Description">${card._Description}</div>
+    </div>`);
 }
 
 async function LoadCards() {
@@ -80,8 +80,8 @@ async function ToggleAddCardDialog(TabTmp) {
 async function AddCardFromDialog() {
     var card = {
         tab: document.getElementById("Input-Column").value,
-        title: document.getElementById("Input-Title").value,
-        description: document.getElementById("Input-Description").value,
+        title: document.getElementById("Input-Title").value + " ",
+        description: document.getElementById("Input-Description").value + " ",
     };
 
     response = await fetch(
@@ -123,7 +123,7 @@ function drop(ev, el) {
             UpdateCard(card);
         }
     });
-    el.appendChild(document.getElementById(data));
+    el.prepend(document.getElementById(data));
 }
 
 function MoveCard(value, el) {
@@ -131,7 +131,7 @@ function MoveCard(value, el) {
         if (card._Id == el.parentElement.id) {
             if (1 <= (parseInt(card._Tab) + value) && 3 >= (parseInt(card._Tab) + value)) {
                 card._Tab = (parseInt(card._Tab) + value);
-                document.getElementById(`KanbanCards${card._Tab}`).appendChild(el.parentElement);
+                document.getElementById(`KanbanCards${card._Tab}`).prepend(el.parentElement);
                 UpdateCard(card);
             }
         }
