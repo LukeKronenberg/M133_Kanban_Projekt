@@ -47,9 +47,26 @@ function DisplayCard(card) {
 }
 
 async function LoadCards() {
-    response = await fetch(`/cards`);
-    cards = await response.json();
-    for (const card of cards.data) {
+    response = await (await fetch(`/cards`)).json();
+    for (const column of response.dataColumns){
+        console.log(column)
+        document.getElementById("Input-Column").insertAdjacentHTML('beforeend', 
+        `<option value="${column.id}">${column.title}</option>`)
+        document.getElementById("MainWindow").insertAdjacentHTML('beforeend', 
+        `<div class="Kanban-Column">
+        <div class="Kanban-Container box-dark" draggable="false">
+            <div class="Kanban-Title">${column.title}</div>
+            <div>
+                <img onclick="ToggleAddCardDialog(${column.id})" draggable="false" class="imgBase ImgAddCard" src="Images/plus.png" alt="Add New Card">
+            </div>
+            <div class="KanbanCards" id="KanbanCards${column.id}" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+
+            </div>
+        </div>
+    </div>`);
+    }
+
+    for (const card of response.dataCards) {
         newCard = new Card(card.id, card.tab, card.title, card.description);
         Cards.push(newCard);
         DisplayCard(newCard);

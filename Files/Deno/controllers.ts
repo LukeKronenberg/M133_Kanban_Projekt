@@ -1,8 +1,19 @@
-import Card from "./interface.ts";
+import { Card, Column } from "./interface.ts";
 import { v4 } from "https://deno.land/std@0.77.0/uuid/mod.ts";
 
 export var cards: Card[] = [];
-
+export var columns: Column[] = [
+    {
+        id: 1,
+        title: "ToDo"
+    }, {
+        id: 2,
+        title: "Doing"
+    }, {
+        id: 3,
+        title: "Done"
+    }
+];
 
 export default {
 
@@ -10,7 +21,8 @@ export default {
         response.status = 200;
         response.body = {
             success: true,
-            data: cards,
+            dataCards: cards,
+            dataColumns: columns
         }
     },
     createCard: async ({ request, response }: { request: any, response: any },) => {
@@ -72,13 +84,13 @@ export default {
             title: values._Title,
             description: values._Description,
         };
-        
+
         cards.map(c => {
             if (c.id === params.id) {
                 c.tab = updatedCard.tab;
             }
         });
-        
+
         response.status = 200;
         response.body = {
             success: true,

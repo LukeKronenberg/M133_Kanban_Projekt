@@ -18,9 +18,6 @@
         <div id="AddCardDialog" class="AddCardDialog box-dark hidden">
             <label for="Column">Column</label><br>
             <select name="Column" id="Input-Column">
-                <option value="1">ToDo</option>
-                <option value="2">Doing</option>
-                <option value="3">Done</option>
             </select><br><br>
             <label for="">Title</label><br>
             <textarea name="" id="Input-Title" rows="1"></textarea><br><br>
@@ -28,39 +25,6 @@
             <textarea name="" id="Input-Description" rows="10"></textarea><br>
             <a class="Card-Title TextButton box-bright" onclick=AddCardFromDialog()>Add Card</a><br>
             <a class="Card-Title TextButton box-bright" onclick="ToggleAddCardDialog()">Cancel</a>
-        </div>
-        <div class="Kanban-Column">
-            <div class="Kanban-Container box-dark" draggable="false">
-                <div class="Kanban-Title">ToDo</div>
-                <div>
-                    <img onclick="ToggleAddCardDialog(1)" draggable="false" class="imgBase ImgAddCard" src="Images/plus.png" alt="Add New Card">
-                </div>
-                <div class="KanbanCards" id="KanbanCards1" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-
-                </div>
-            </div>
-        </div>
-        <div class="Kanban-Column">
-            <div class="Kanban-Container box-dark" draggable="false">
-                <div class="Kanban-Title">Doing</div>
-                <div>
-                    <img onclick="ToggleAddCardDialog(2)" draggable="false" class="imgBase ImgAddCard" src="Images/plus.png" alt="Add New Card">
-                </div>
-                <div class="KanbanCards" id="KanbanCards2" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-                    
-                </div>
-            </div>
-        </div>
-        <div class="Kanban-Column">
-            <div class="Kanban-Container box-dark" draggable="false">
-                <div class="Kanban-Title">Done</div>
-                <div>
-                    <img onclick="ToggleAddCardDialog(3)" draggable="false" class="imgBase ImgAddCard" src="Images/plus.png" alt="Add New Card">
-                </div>
-                <div class="KanbanCards" id="KanbanCards3" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-
-                </div>
-            </div>
         </div>
     </div>
 </body>
