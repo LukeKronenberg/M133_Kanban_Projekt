@@ -22,13 +22,13 @@ class Card {
     get Id() {
         return this._Id;
     }
-    get Id() {
+    get Tab() {
         return this._Tab;
     }
-    get Id() {
+    get Title() {
         return this._Title;
     }
-    get Id() {
+    get Description() {
         return this._Description;
     }
 }
@@ -39,7 +39,7 @@ function DisplayCard(card) {
     document.getElementById(`KanbanCards${card._Tab}`).insertAdjacentHTML('afterbegin', 
     `<div class="Kanban-Card box-bright" id="${card._Id}" ondragstart="drag(event)" draggable="true">
     <a class="LeftRightButtons" onclick="MoveCard(-1, this)"><-</a>
-    <img onclick="DelCard('${card._Id}')" class="ImgDelCard imgBase" src="Images/trash.png" alt="Delete Card">
+    <img draggable="false" onclick="DelCard('${card._Id}')" class="ImgDelCard imgBase" src="Images/trash.png" alt="Delete Card">
     <a class="LeftRightButtons" onclick="MoveCard(1, this)">-></a></br>
     <div class="Card-Title" id="Title">${card._Title}</div>
     <div class="Card-Description" id="Description">${card._Description}</div>
@@ -49,7 +49,6 @@ function DisplayCard(card) {
 async function LoadCards() {
     response = await (await fetch(`/cards`)).json();
     for (const column of response.dataColumns){
-        console.log(column)
         document.getElementById("Input-Column").insertAdjacentHTML('beforeend', 
         `<option value="${column.id}">${column.title}</option>`)
         document.getElementById("MainWindow").insertAdjacentHTML('beforeend', 
@@ -136,7 +135,6 @@ function drop(ev, el) {
     Cards.forEach(async card => {
         if (card._Id == data) {
             card._Tab = el.id.replace("KanbanCards", "");
-            console.log(card);
             UpdateCard(card);
         }
     });
